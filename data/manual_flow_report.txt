@@ -1,0 +1,53 @@
+Manual ovs-ofctl flow report
+Expected policy:
+  h1 <-> h3 reachable
+  h2 <-> h4 reachable
+  all other host pairs blocked
+
+=== Directed connectivity ===
+h1 -> h3: 0.0% loss expected=reachable result=PASS
+h3 -> h1: 0.0% loss expected=reachable result=PASS
+h2 -> h4: 0.0% loss expected=reachable result=PASS
+h4 -> h2: 0.0% loss expected=reachable result=PASS
+h1 -> h2: 100.0% loss expected=blocked result=PASS
+h1 -> h4: 100.0% loss expected=blocked result=PASS
+h2 -> h3: 100.0% loss expected=blocked result=PASS
+h3 -> h4: 100.0% loss expected=blocked result=PASS
+
+=== ovs-ofctl -O OpenFlow13 dump-flows s1 ===
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x0, duration=40.983s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:02 actions=drop
+ cookie=0x0, duration=40.960s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:04 actions=drop
+ cookie=0x0, duration=40.917s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:02,dl_dst=00:00:00:00:00:01 actions=drop
+ cookie=0x0, duration=40.880s, table=0, n_packets=9, n_bytes=714, priority=400,dl_src=00:00:00:00:00:02,dl_dst=00:00:00:00:00:03 actions=drop
+ cookie=0x0, duration=40.821s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:02 actions=drop
+ cookie=0x0, duration=40.792s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:04 actions=drop
+ cookie=0x0, duration=40.748s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:04,dl_dst=00:00:00:00:00:01 actions=drop
+ cookie=0x0, duration=40.706s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:04,dl_dst=00:00:00:00:00:03 actions=drop
+ cookie=0x0, duration=41.304s, table=0, n_packets=28, n_bytes=1904, priority=300,in_port=1,dl_src=00:00:00:00:00:01 actions=output:3
+ cookie=0x0, duration=41.269s, table=0, n_packets=22, n_bytes=1652, priority=300,in_port=2,dl_src=00:00:00:00:00:02 actions=output:3
+ cookie=0x0, duration=41.288s, table=0, n_packets=14, n_bytes=1260, priority=300,in_port=3,dl_dst=00:00:00:00:00:01 actions=output:1
+ cookie=0x0, duration=41.255s, table=0, n_packets=14, n_bytes=1260, priority=300,in_port=3,dl_dst=00:00:00:00:00:02 actions=output:2
+ cookie=0x0, duration=41.230s, table=0, n_packets=6, n_bytes=252, priority=200,in_port=3,dl_dst=ff:ff:ff:ff:ff:ff actions=output:1,output:2
+ cookie=0x0, duration=41.214s, table=0, n_packets=0, n_bytes=0, priority=200,arp,in_port=3 actions=output:1,output:2
+ cookie=0x0, duration=41.196s, table=0, n_packets=0, n_bytes=0, priority=200,arp,in_port=1 actions=output:3
+ cookie=0x0, duration=41.172s, table=0, n_packets=0, n_bytes=0, priority=200,arp,in_port=2 actions=output:3
+
+=== ovs-ofctl -O OpenFlow13 dump-flows s2 ===
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x0, duration=40.978s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:02 actions=drop
+ cookie=0x0, duration=40.945s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:04 actions=drop
+ cookie=0x0, duration=40.906s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:02,dl_dst=00:00:00:00:00:01 actions=drop
+ cookie=0x0, duration=40.856s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:02,dl_dst=00:00:00:00:00:03 actions=drop
+ cookie=0x0, duration=40.811s, table=0, n_packets=6, n_bytes=252, priority=400,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:02 actions=drop
+ cookie=0x0, duration=40.773s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:04 actions=drop
+ cookie=0x0, duration=40.737s, table=0, n_packets=5, n_bytes=210, priority=400,dl_src=00:00:00:00:00:04,dl_dst=00:00:00:00:00:01 actions=drop
+ cookie=0x0, duration=40.690s, table=0, n_packets=0, n_bytes=0, priority=400,dl_src=00:00:00:00:00:04,dl_dst=00:00:00:00:00:03 actions=drop
+ cookie=0x0, duration=41.152s, table=0, n_packets=22, n_bytes=1652, priority=300,in_port=2,dl_src=00:00:00:00:00:03 actions=output:1
+ cookie=0x0, duration=41.102s, table=0, n_packets=16, n_bytes=1400, priority=300,in_port=3,dl_src=00:00:00:00:00:04 actions=output:1
+ cookie=0x0, duration=41.130s, table=0, n_packets=13, n_bytes=1218, priority=300,in_port=1,dl_dst=00:00:00:00:00:03 actions=output:2
+ cookie=0x0, duration=41.072s, table=0, n_packets=13, n_bytes=1218, priority=300,in_port=1,dl_dst=00:00:00:00:00:04 actions=output:3
+ cookie=0x0, duration=41.045s, table=0, n_packets=20, n_bytes=840, priority=200,in_port=1,dl_dst=ff:ff:ff:ff:ff:ff actions=output:2,output:3
+ cookie=0x0, duration=41.027s, table=0, n_packets=0, n_bytes=0, priority=200,arp,in_port=1 actions=output:2,output:3
+ cookie=0x0, duration=41.015s, table=0, n_packets=0, n_bytes=0, priority=200,arp,in_port=2 actions=output:1
+ cookie=0x0, duration=41s, table=0, n_packets=0, n_bytes=0, priority=200,arp,in_port=3 actions=output:1

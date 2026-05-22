@@ -1,0 +1,249 @@
+Fat-tree ECMP demo report
+Expected controller mode: FAT_TREE_ECMP=1
+
+$ h1 iperf3 -c 10.3.1.2 -p 5201 -t 8 -f m
+$ h2 iperf3 -c 10.3.1.1 -p 5202 -t 8 -f m
+$ h3 iperf3 -c 10.3.0.2 -p 5203 -t 8 -f m
+$ h4 iperf3 -c 10.3.0.1 -p 5204 -t 8 -f m
+=== client h1 ===
+Connecting to host 10.3.1.2, port 5201
+[  7] local 10.0.0.1 port 36950 connected to 10.3.1.2 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  7]   0.00-1.00   sec  2.50 MBytes  21.0 Mbits/sec    0    256 KBytes       
+[  7]   1.00-2.00   sec  1.12 MBytes  9.44 Mbits/sec    0    256 KBytes       
+[  7]   2.00-3.00   sec  1.12 MBytes  9.43 Mbits/sec    0    256 KBytes       
+[  7]   3.00-4.00   sec  1.12 MBytes  9.44 Mbits/sec    0    256 KBytes       
+[  7]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec    0    256 KBytes       
+[  7]   5.00-6.00   sec  1.12 MBytes  9.44 Mbits/sec    0    256 KBytes       
+[  7]   6.00-7.00   sec  1.12 MBytes  9.44 Mbits/sec    0    256 KBytes       
+[  7]   7.00-8.00   sec  1.00 MBytes  8.38 Mbits/sec    0    256 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  7]   0.00-8.00   sec  10.2 MBytes  10.7 Mbits/sec    0             sender
+[  7]   0.00-8.16   sec  9.25 MBytes  9.51 Mbits/sec                  receiver
+
+iperf Done.
+
+=== client h2 ===
+Connecting to host 10.3.1.1, port 5202
+[  7] local 10.0.0.2 port 53952 connected to 10.3.1.1 port 5202
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  7]   0.00-1.00   sec  2.62 MBytes  22.0 Mbits/sec    0    260 KBytes       
+[  7]   1.00-2.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   2.00-3.00   sec  1.12 MBytes  9.43 Mbits/sec    0    260 KBytes       
+[  7]   3.00-4.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   5.00-6.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   6.00-7.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   7.00-8.00   sec  1.12 MBytes  9.43 Mbits/sec    0    260 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  7]   0.00-8.00   sec  10.5 MBytes  11.0 Mbits/sec    0             sender
+[  7]   0.00-8.13   sec  9.25 MBytes  9.54 Mbits/sec                  receiver
+
+iperf Done.
+
+=== client h3 ===
+Connecting to host 10.3.0.2, port 5203
+[  7] local 10.0.1.1 port 51782 connected to 10.3.0.2 port 5203
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  7]   0.00-1.00   sec  2.62 MBytes  22.0 Mbits/sec    0    260 KBytes       
+[  7]   1.00-2.00   sec  1.12 MBytes  9.43 Mbits/sec    0    260 KBytes       
+[  7]   2.00-3.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   3.00-4.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   5.00-6.00   sec  1.12 MBytes  9.45 Mbits/sec    0    260 KBytes       
+[  7]   6.00-7.00   sec  1.12 MBytes  9.44 Mbits/sec    0    260 KBytes       
+[  7]   7.00-8.00   sec  1.12 MBytes  9.43 Mbits/sec    0    260 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  7]   0.00-8.00   sec  10.5 MBytes  11.0 Mbits/sec    0             sender
+[  7]   0.00-8.13   sec  9.25 MBytes  9.55 Mbits/sec                  receiver
+
+iperf Done.
+
+=== client h4 ===
+Connecting to host 10.3.0.1, port 5204
+[  7] local 10.0.1.2 port 56942 connected to 10.3.0.1 port 5204
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  7]   0.00-1.00   sec  2.75 MBytes  23.1 Mbits/sec    0    383 KBytes       
+[  7]   1.00-2.00   sec  1.62 MBytes  13.6 Mbits/sec    0    383 KBytes       
+[  7]   2.00-3.00   sec   896 KBytes  7.34 Mbits/sec    0    383 KBytes       
+[  7]   3.00-4.00   sec   768 KBytes  6.29 Mbits/sec    0    383 KBytes       
+[  7]   4.00-5.00   sec  1.62 MBytes  13.6 Mbits/sec    0    383 KBytes       
+[  7]   5.00-6.00   sec   896 KBytes  7.34 Mbits/sec    0    383 KBytes       
+[  7]   6.00-7.00   sec  1.50 MBytes  12.6 Mbits/sec    0    383 KBytes       
+[  7]   7.00-8.00   sec   896 KBytes  7.34 Mbits/sec    0    383 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  7]   0.00-8.00   sec  10.9 MBytes  11.4 Mbits/sec    0             sender
+[  7]   0.00-8.14   sec  9.25 MBytes  9.53 Mbits/sec                  receiver
+
+iperf Done.
+
+=== server h16 ===
+-----------------------------------------------------------
+Server listening on 5201 (test #1)
+-----------------------------------------------------------
+Accepted connection from 10.0.0.1, port 36942
+[  7] local 10.3.1.2 port 5201 connected to 10.0.0.1 port 36950
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-1.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   1.00-2.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   2.00-3.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   3.00-4.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   4.00-5.00   sec  1.25 MBytes  10.5 Mbits/sec                  
+[  7]   5.00-6.00   sec  1.00 MBytes  8.39 Mbits/sec                  
+[  7]   6.00-7.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   7.00-8.00   sec  1.25 MBytes  10.5 Mbits/sec                  
+[  7]   8.00-8.16   sec   128 KBytes  6.66 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-8.16   sec  9.25 MBytes  9.51 Mbits/sec                  receiver
+
+=== server h15 ===
+-----------------------------------------------------------
+Server listening on 5202 (test #1)
+-----------------------------------------------------------
+Accepted connection from 10.0.0.2, port 53950
+[  7] local 10.3.1.1 port 5202 connected to 10.0.0.2 port 53952
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-1.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   1.00-2.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   2.00-3.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   3.00-4.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   5.00-6.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   6.00-7.00   sec  1.25 MBytes  10.5 Mbits/sec                  
+[  7]   7.00-8.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   8.00-8.13   sec   128 KBytes  8.04 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-8.13   sec  9.25 MBytes  9.54 Mbits/sec                  receiver
+
+=== server h14 ===
+-----------------------------------------------------------
+Server listening on 5203 (test #1)
+-----------------------------------------------------------
+Accepted connection from 10.0.1.1, port 51778
+[  7] local 10.3.0.2 port 5203 connected to 10.0.1.1 port 51782
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-1.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   1.00-2.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   2.00-3.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   3.00-4.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   5.00-6.00   sec  1.25 MBytes  10.5 Mbits/sec                  
+[  7]   6.00-7.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   7.00-8.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   8.00-8.13   sec   128 KBytes  8.43 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-8.13   sec  9.25 MBytes  9.55 Mbits/sec                  receiver
+
+=== server h13 ===
+-----------------------------------------------------------
+Server listening on 5204 (test #1)
+-----------------------------------------------------------
+Accepted connection from 10.0.1.2, port 56928
+[  7] local 10.3.0.1 port 5204 connected to 10.0.1.2 port 56942
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-1.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   1.00-2.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   2.00-3.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   3.00-4.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   5.00-6.00   sec  1.12 MBytes  9.44 Mbits/sec                  
+[  7]   6.00-7.00   sec  1.25 MBytes  10.5 Mbits/sec                  
+[  7]   7.00-8.00   sec  1.12 MBytes  9.43 Mbits/sec                  
+[  7]   8.00-8.14   sec   128 KBytes  7.31 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-8.14   sec  9.25 MBytes  9.53 Mbits/sec                  receiver
+
+=== ovs-ofctl dump-groups e00 ===
+OFPST_GROUP_DESC reply (OF1.3) (xid=0x2):
+ group_id=1,type=select,bucket=weight:100,actions=output:1,bucket=weight:100,actions=output:2
+
+=== ovs-ofctl dump-ports e00 ===
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=12.716s
+  port  1: rx pkts=20, bytes=3030, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=20, bytes=3030, drop=0, errs=0, coll=0
+           duration=12.721s
+  port  4: rx pkts=192, bytes=9923480, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=202, bytes=15411, drop=0, errs=0, coll=0
+           duration=12.721s
+  port  2: rx pkts=378, bytes=27163, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=385, bytes=19945511, drop=0, errs=0, coll=0
+           duration=12.721s
+  port  3: rx pkts=193, bytes=10020693, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=200, bytes=15235, drop=0, errs=0, coll=0
+           duration=12.721s
+
+=== ovs-ofctl dump-groups a00 ===
+OFPST_GROUP_DESC reply (OF1.3) (xid=0x2):
+
+=== ovs-ofctl dump-ports a00 ===
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=12.679s
+  port  4: rx pkts=19, bytes=2960, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=188, bytes=9989435, drop=0, errs=0, coll=0
+           duration=12.685s
+  port  1: rx pkts=20, bytes=3030, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=20, bytes=3030, drop=0, errs=0, coll=0
+           duration=12.686s
+  port  2: rx pkts=188, bytes=9989435, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=187, bytes=14032, drop=0, errs=0, coll=0
+           duration=12.685s
+  port  3: rx pkts=187, bytes=14052, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=19, bytes=2980, drop=0, errs=0, coll=0
+           duration=12.685s
+
+=== ovs-ofctl dump-groups a01 ===
+OFPST_GROUP_DESC reply (OF1.3) (xid=0x2):
+
+=== ovs-ofctl dump-ports a01 ===
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=12.642s
+  port  1: rx pkts=385, bytes=19945511, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=378, bytes=27163, drop=0, errs=0, coll=0
+           duration=12.649s
+  port  4: rx pkts=381, bytes=27514, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=216, bytes=10024228, drop=0, errs=0, coll=0
+           duration=12.650s
+  port  2: rx pkts=220, bytes=9947016, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=215, bytes=16595, drop=0, errs=0, coll=0
+           duration=12.650s
+  port  3: rx pkts=213, bytes=16427, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=388, bytes=19868209, drop=0, errs=0, coll=0
+           duration=12.651s
+
+=== ovs-ofctl dump-groups e01 ===
+OFPST_GROUP_DESC reply (OF1.3) (xid=0x2):
+ group_id=1,type=select,bucket=weight:100,actions=output:1,bucket=weight:100,actions=output:2
+
+=== ovs-ofctl dump-ports e01 ===
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=12.734s
+  port  4: rx pkts=197, bytes=9943461, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=203, bytes=15453, drop=0, errs=0, coll=0
+           duration=12.739s
+  port  1: rx pkts=187, bytes=14032, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=188, bytes=9989435, drop=0, errs=0, coll=0
+           duration=12.741s
+  port  2: rx pkts=215, bytes=16595, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=220, bytes=9947016, drop=0, errs=0, coll=0
+           duration=12.740s
+  port  3: rx pkts=192, bytes=9988672, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=204, bytes=15564, drop=0, errs=0, coll=0
+           duration=12.741s
+

@@ -1,0 +1,105 @@
+SDN performance limit test
+Topology settings:
+  host-switch links: bw=10Mbps delay=5ms loss=1%
+  s1-s2 trunk:       bw=20Mbps delay=3ms loss=0.5%
+
+=== h1 -> h3 ===
+$ h1 ping -c 10 -W 1 10.0.0.3
+PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=57.0 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=27.1 ms
+64 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=26.5 ms
+64 bytes from 10.0.0.3: icmp_seq=4 ttl=64 time=26.6 ms
+64 bytes from 10.0.0.3: icmp_seq=5 ttl=64 time=26.3 ms
+64 bytes from 10.0.0.3: icmp_seq=6 ttl=64 time=26.6 ms
+64 bytes from 10.0.0.3: icmp_seq=7 ttl=64 time=27.1 ms
+64 bytes from 10.0.0.3: icmp_seq=8 ttl=64 time=26.2 ms
+64 bytes from 10.0.0.3: icmp_seq=9 ttl=64 time=26.6 ms
+64 bytes from 10.0.0.3: icmp_seq=10 ttl=64 time=26.4 ms
+
+--- 10.0.0.3 ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 9013ms
+rtt min/avg/max/mdev = 26.178/29.619/56.960/9.117 ms
+
+$ h1 iperf3 -c 10.0.0.3 -p 5201 -t 5 -f m
+Connecting to host 10.0.0.3, port 5201
+[  5] local 10.0.0.1 port 35560 connected to 10.0.0.3 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   896 KBytes  7.33 Mbits/sec   18   12.7 KBytes       
+[  5]   1.00-2.00   sec   384 KBytes  3.15 Mbits/sec    8   12.7 KBytes       
+[  5]   2.00-3.00   sec   512 KBytes  4.19 Mbits/sec    5   17.0 KBytes       
+[  5]   3.00-4.00   sec   384 KBytes  3.15 Mbits/sec    8   7.07 KBytes       
+[  5]   4.00-5.00   sec   384 KBytes  3.14 Mbits/sec    3   18.4 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-5.00   sec  2.50 MBytes  4.19 Mbits/sec   42             sender
+[  5]   0.00-5.03   sec  2.25 MBytes  3.75 Mbits/sec                  receiver
+
+iperf Done.
+
+$ h3 iperf3 server output
+-----------------------------------------------------------
+Server listening on 5201 (test #1)
+-----------------------------------------------------------
+Accepted connection from 10.0.0.1, port 35544
+[  7] local 10.0.0.3 port 5201 connected to 10.0.0.1 port 35560
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-1.00   sec   512 KBytes  4.19 Mbits/sec                  
+[  7]   1.00-2.00   sec   512 KBytes  4.19 Mbits/sec                  
+[  7]   2.00-3.00   sec   384 KBytes  3.15 Mbits/sec                  
+[  7]   3.00-4.00   sec   384 KBytes  3.15 Mbits/sec                  
+[  7]   4.00-5.00   sec   512 KBytes  4.19 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-5.03   sec  2.25 MBytes  3.75 Mbits/sec                  receiver
+
+=== h2 -> h4 ===
+$ h2 ping -c 10 -W 1 10.0.0.4
+PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
+64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=56.5 ms
+64 bytes from 10.0.0.4: icmp_seq=2 ttl=64 time=26.7 ms
+64 bytes from 10.0.0.4: icmp_seq=3 ttl=64 time=26.7 ms
+64 bytes from 10.0.0.4: icmp_seq=4 ttl=64 time=26.1 ms
+64 bytes from 10.0.0.4: icmp_seq=5 ttl=64 time=26.7 ms
+64 bytes from 10.0.0.4: icmp_seq=6 ttl=64 time=26.2 ms
+64 bytes from 10.0.0.4: icmp_seq=7 ttl=64 time=26.2 ms
+64 bytes from 10.0.0.4: icmp_seq=8 ttl=64 time=26.3 ms
+64 bytes from 10.0.0.4: icmp_seq=9 ttl=64 time=26.2 ms
+64 bytes from 10.0.0.4: icmp_seq=10 ttl=64 time=26.5 ms
+
+--- 10.0.0.4 ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 9013ms
+rtt min/avg/max/mdev = 26.125/29.417/56.509/9.033 ms
+
+$ h2 iperf3 -c 10.0.0.4 -p 5202 -t 5 -f m
+Connecting to host 10.0.0.4, port 5202
+[  5] local 10.0.0.2 port 53450 connected to 10.0.0.4 port 5202
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   640 KBytes  5.24 Mbits/sec    7   15.6 KBytes       
+[  5]   1.00-2.00   sec   384 KBytes  3.15 Mbits/sec   13   8.48 KBytes       
+[  5]   2.00-3.00   sec   256 KBytes  2.10 Mbits/sec    7   9.90 KBytes       
+[  5]   3.00-4.00   sec   384 KBytes  3.14 Mbits/sec    5   18.4 KBytes       
+[  5]   4.00-5.00   sec   384 KBytes  3.14 Mbits/sec    8   11.3 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-5.00   sec  2.00 MBytes  3.35 Mbits/sec   40             sender
+[  5]   0.00-5.03   sec  1.75 MBytes  2.92 Mbits/sec                  receiver
+
+iperf Done.
+
+$ h4 iperf3 server output
+-----------------------------------------------------------
+Server listening on 5202 (test #1)
+-----------------------------------------------------------
+Accepted connection from 10.0.0.2, port 53436
+[  7] local 10.0.0.4 port 5202 connected to 10.0.0.2 port 53450
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-1.00   sec   384 KBytes  3.14 Mbits/sec                  
+[  7]   1.00-2.00   sec   384 KBytes  3.15 Mbits/sec                  
+[  7]   2.00-3.00   sec   256 KBytes  2.10 Mbits/sec                  
+[  7]   3.00-4.00   sec   384 KBytes  3.15 Mbits/sec                  
+[  7]   4.00-5.00   sec   384 KBytes  3.15 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  7]   0.00-5.03   sec  1.75 MBytes  2.92 Mbits/sec                  receiver
+

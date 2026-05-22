@@ -1,0 +1,28 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local/agent runtime folders
+.gitrepo/
+.codex/
+.agents/
+git-local
+
+# Temporary vendored or downloaded sources
+tmp/
+
+# Mininet/OVS runtime leftovers
+*.log
+
+# Local backup/scratch files
+README.md.bak
+test.txt
+*.pdf
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+
+# Keep experiment evidence files under data/ and captures/.
