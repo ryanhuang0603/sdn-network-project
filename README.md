@@ -42,6 +42,12 @@ pip install -r requirements.txt
 
 Ryu 4.34 在已验证环境中来自本地源码安装，详见 `docs/DEPENDENCIES.md` 的 Ryu Source Install 小节。
 
+快速安装 Ryu：
+
+```bash
+bash scripts/install_ryu.sh
+```
+
 依赖说明详见：
 
 ```text

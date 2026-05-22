@@ -60,17 +60,18 @@ provide the API expected by Ryu's setup hook.
 Recreate the verified Ryu install:
 
 ```bash
-mkdir -p tmp
-git clone https://github.com/faucetsdn/ryu tmp/ryu_source
-cd tmp/ryu_source
-git checkout d6cda4f4
-git apply ../../patches/ryu-python314-hooks.patch
-pip install .
-cd ../..
+bash scripts/install_ryu.sh
 ```
 
 The local checkout is intentionally under `tmp/` and is not committed to this
 repository.
+
+The script pins the upstream repository and commit:
+
+```text
+https://github.com/faucetsdn/ryu
+d6cda4f4
+```
 
 Check the Python-side dependencies:
 
