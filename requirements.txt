@@ -1,2 +1,4 @@
 numpy==2.4.6
-ryu==4.34
+
+# Ryu 4.34 is installed from a patched source checkout in the verified
+# Python 3.14 environment. See docs/DEPENDENCIES.md.

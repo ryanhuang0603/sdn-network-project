@@ -5,5 +5,3 @@ dependencies:
   - python=3.14
   - pip
   - numpy=2.4.6
-  - pip:
-      - ryu==4.34

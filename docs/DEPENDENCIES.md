@@ -9,7 +9,7 @@ network namespaces, veth pairs, Open vSwitch bridges, and traffic-control queues
 - Ubuntu Linux
 - Python 3.14.4 in conda environment `network`
 - numpy 2.4.6
-- Ryu 4.34
+- Ryu 4.34, installed from a patched local source checkout
 - Mininet
 - Open vSwitch with OpenFlow 1.3 support
 - iperf3
@@ -40,6 +40,7 @@ Recommended conda setup:
 ```bash
 conda env create -f environment.yml
 conda activate network
+pip install -r requirements.txt
 ```
 
 If the conda environment already exists:
@@ -48,6 +49,28 @@ If the conda environment already exists:
 conda activate network
 pip install -r requirements.txt
 ```
+
+## Ryu Source Install
+
+The verified environment uses Ryu from a local source checkout, not directly
+from the PyPI wheel/sdist. This avoids an installation issue with newer
+Python/setuptools versions where `setuptools.command.easy_install` may no longer
+provide the API expected by Ryu's setup hook.
+
+Recreate the verified Ryu install:
+
+```bash
+mkdir -p tmp
+git clone https://github.com/faucetsdn/ryu tmp/ryu_source
+cd tmp/ryu_source
+git checkout d6cda4f4
+git apply ../../patches/ryu-python314-hooks.patch
+pip install .
+cd ../..
+```
+
+The local checkout is intentionally under `tmp/` and is not committed to this
+repository.
 
 Check the Python-side dependencies:
 

@@ -30,6 +30,7 @@ Python 依赖：
 ```bash
 conda env create -f environment.yml
 conda activate network
+pip install -r requirements.txt
 ```
 
 如果已经有 `network` 环境：
@@ -38,6 +39,8 @@ conda activate network
 conda activate network
 pip install -r requirements.txt
 ```
+
+Ryu 4.34 在已验证环境中来自本地源码安装，详见 `docs/DEPENDENCIES.md` 的 Ryu Source Install 小节。
 
 依赖说明详见：
 
