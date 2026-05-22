@@ -8,12 +8,42 @@
 
 已验证环境：
 
+- Ubuntu Linux
+- Python 3.14.4
+- numpy 2.4.6
+- Ryu 4.34
 - Mininet
 - Open vSwitch / OpenFlow 1.3
-- Ryu 4.34
 - iperf3
 - tshark / Wireshark
 - Python conda 环境：`network`
+
+系统依赖：
+
+```bash
+sudo apt update
+sudo apt install -y mininet openvswitch-switch iperf3 tshark wireshark
+```
+
+Python 依赖：
+
+```bash
+conda env create -f environment.yml
+conda activate network
+```
+
+如果已经有 `network` 环境：
+
+```bash
+conda activate network
+pip install -r requirements.txt
+```
+
+依赖说明详见：
+
+```text
+docs/DEPENDENCIES.md
+```
 
 每次启动新的 Mininet 拓扑前，建议先清理旧状态：
 
@@ -254,6 +284,7 @@ python3 -m py_compile \
 | `data/port_stats_log.csv` | 端口统计和预测日志 |
 | `data/performance_report.txt` | ping/iperf3 性能限制报告 |
 | `data/fat_tree_ecmp_report.txt` | 胖树 ECMP 证据 |
+| `docs/DEPENDENCIES.md` | 依赖安装与环境说明 |
 | `docs/TEST_REPORT.md` | 测试报告与证据索引 |
 | `docs/PROJECT_REPORT.md` | 项目报告初稿 |
 | `docs/SCREENSHOT_GUIDE.md` | 截图清单 |
